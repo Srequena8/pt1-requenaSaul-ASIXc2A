@@ -1,7 +1,7 @@
 document.getElementById('goRuleta').addEventListener('click', () => loadRuleta(document.getElementById('toolContainer')));
 document.getElementById('goTemporitzador').addEventListener('click', () => loadTemporizador(document.getElementById('toolContainer')));
 
-function loadRuleta(container) {
+async function loadRuleta(container) {
     container.innerHTML = `
         <h2>Ruleta de Noms</h2>
         <div class="ruleta-container">
@@ -12,19 +12,17 @@ function loadRuleta(container) {
         <p id="selectedName">Nom seleccionat: <span></span></p>
     `;
 
-    const names = [
-        "Jane", "Daniel", "Marlon", "Spencer", "Katherine", "Bette",
-        "Jack", "Ingrid", "Denzel", "Gary", "Meryl", "Cate", "Robert", 
-        "Dustin", "Jessica"
-    ];
+    const response = await fetch('NOMS.TXT');
+    const text = await response.text();
+    const names = text.trim().split('\n');
     const numSegments = names.length;
     const segmentAngle = 360 / numSegments;
     const ruleta = document.getElementById('ruleta');
 
     // Generar segmentos con los nombres
     ruleta.innerHTML = names.map((name, i) => `
-        <div class="segment" style="transform: rotate(${i * segmentAngle}deg); background-color: hsl(${i * 30}, 100%, 50%)">
-            <span>${name}</span>
+        <div class="segment" style="transform: rotate(${i * segmentAngle}deg); background-color: hsl(${i * 360 / numSegments}, 100%, 50%)">
+            <span style="transform: rotate(${segmentAngle / 2}deg)">${name}</span>
         </div>
     `).join('');
 
@@ -40,9 +38,6 @@ function loadRuleta(container) {
         }, 4000);
     });
 }
-
-
-
 
 function loadTemporizador(container) {
     container.innerHTML = `

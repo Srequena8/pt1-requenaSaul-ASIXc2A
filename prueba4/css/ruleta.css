@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f0f0f0be;
+    background-color: #f0f0f0;
 }
 h1 {
     color: #333;
@@ -14,13 +14,13 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #a728a7;
-    color: rgb(255, 255, 255);
+    background-color: #28a745;
+    color: white;
     border: none;
     border-radius: 5px;
 }
 button:hover {
-    background-color: #882177;
+    background-color: #218838;
 }
 #selectedName {
     margin-top: 20px;
